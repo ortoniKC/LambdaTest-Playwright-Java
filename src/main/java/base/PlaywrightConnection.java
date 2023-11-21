@@ -29,6 +29,6 @@ public class PlaywrightConnection {
 	}
 
 	protected void setTestStatus(String status, String remark,Page page) {
-		page.evaluate("_ => {}", "lambdatest_action: { \"action\": \"setTestStatus\", \"arguments\": { \"status\": \"" + status + "\", \"remark\": \"" + remark + "\"}}");
+		page.evaluate("() => {}", "lambdatest_action: { \"action\": \"setTestStatus\", \"arguments\": { \"status\": \"" + status + "\", \"remark\": \"" + remark + "\"}}");
 	}
 }

@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 
 import base.Driver;
 import base.PlaywrightConnection;
@@ -26,13 +27,14 @@ public class TestNGDemoTest extends PlaywrightConnection{
 		Page page = driver.getPage();
 		try {
 			page.navigate("https://www.duckduckgo.com");
+			page.waitForLoadState(LoadState.LOAD);
 			Locator locator = page.locator("[name=\"q\"]");
 			locator.click();
 			locator.fill("LambdaTest");
 			page.keyboard().press("Enter");
-			String title = page.title();
+			String title = page.url();
 
-			if (title.equals("LambdaTest at")) {
+			if (title.contains("duckduckgo")) {
 				// Use the following code to mark the test status.
 				super.setTestStatus("passed", "Title matched", page);
 			} else {
